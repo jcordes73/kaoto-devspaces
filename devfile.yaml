@@ -32,3 +32,9 @@ commands:
       commandLine: code-oss --install-extension redhat.vscode-kaoto
       component: che-code-runtime-description
     id: install-kaoto-extension
+events:
+  postStart:
+    - install-jbang
+    - install-camel-jbang
+    - install-apache-camel-extension
+    - install-kaoto-extension 
