@@ -21,14 +21,6 @@ commands:
       component: che-code-runtime-description
     id: install-jbang
   - exec:
-      commandLine: jbang trust add -o --fresh --quiet https://github.com/apache/
-      component: tools
-      group:
-        isDefault: true
-        kind: build
-      workingDir: ${PROJECTS_ROOT}/kaoto
-    id: jbang-trust-apache
-  - exec:
       commandLine: jbang app install camel@apache/camel
       component: che-code-runtime-description
     id: install-camel-jbang
@@ -40,6 +32,3 @@ commands:
       commandLine: code-oss --install-extension redhat.vscode-kaoto
       component: tools
     id: install-kaoto-extension
-events:
-  postStart:
-    - jbang-trust-apache
