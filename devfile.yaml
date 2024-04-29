@@ -35,6 +35,6 @@ commands:
 events:
   postStart:
     - install-jbang
-    - trust-apache-jbang
-    - install-camel-jbang
+#    - trust-apache-jbang
+#    - install-camel-jbang
 #    - install-kamel
