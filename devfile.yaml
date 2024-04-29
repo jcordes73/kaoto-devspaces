@@ -1,0 +1,48 @@
+schemaVersion: 2.2.0
+metadata:
+  name: kaoto
+attributes:
+  controller.devfile.io/devworkspace-config:
+    name: devworkspace-config
+    namespace: openshift-operators
+  controller.devfile.io/scc: container-build
+  controller.devfile.io/storage-type: per-workspace
+components:
+  - container:
+      cpuLimit: 2000m
+      cpuRequest: 500m
+      image: registry.redhat.io/devspaces/udi-rhel8:latest
+      memoryLimit: 2G
+      sourceMapping: /projects
+    name: tools
+commands:
+  - apply:
+      component: che-code-injector
+    id: init-container-command
+  - exec:
+      commandLine: curl -Ls https://sh.jbang.dev | bash -s - app setup
+      component: che-code-runtime-description
+    id: install-jbang
+  - exec:
+      commandLine: jbang trust add -o --fresh --quiet https://github.com/apache/
+      component: tools
+      group:
+        isDefault: true
+        kind: build
+      workingDir: ${PROJECTS_ROOT}/kaoto
+    id: jbang-trust-apache
+  - exec:
+      commandLine: jbang app install camel@apache/camel
+      component: che-code-runtime-description
+    id: install-camel-jbang
+  - exec:
+      commandLine: code-oss --install-extension redhat.apache-camel-extension-pack
+      component: tools
+    id: install-apache-camel-extension
+  - exec:
+      commandLine: code-oss --install-extension redhat.vscode-kaoto
+      component: tools
+    id: install-kaoto-extension
+events:
+  postStart:
+    - jbang-trust-apache
