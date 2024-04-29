@@ -21,10 +21,15 @@ commands:
       component: tools
     id: install-jbang
   - exec:
+      commandLine: jbang trust add -o --fresh --quiet https://github.com/apache/
+      component: tools
+    id: trust-apache-jbang
+  - exec:
       commandLine: jbang app install camel@apache/camel
       component: tools
     id: install-camel-jbang
 events:
   postStart:
     - install-jbang
+    - trust-apache-jbang
     - install-camel-jbang
