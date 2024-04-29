@@ -16,9 +16,6 @@ components:
       sourceMapping: /projects
     name: tools
 commands:
-  - apply:
-      component: che-code-injector
-    id: init-container-command
   - exec:
       commandLine: curl -Ls https://sh.jbang.dev | bash -s - app setup
       component: che-code-runtime-description
