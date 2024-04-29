@@ -18,23 +18,13 @@ components:
 commands:
   - exec:
       commandLine: curl -Ls https://sh.jbang.dev | bash -s - app setup
-      component: che-code-injector
+      component: tools
     id: install-jbang
   - exec:
       commandLine: jbang app install camel@apache/camel
-      component: che-code-injector
+      component: tools
     id: install-camel-jbang
-  - exec:
-      commandLine: code-oss --install-extension redhat.apache-camel-extension-pack
-      component: che-code-injector
-    id: install-apache-camel-extension
-  - exec:
-      commandLine: code-oss --install-extension redhat.vscode-kaoto
-      component: che-code-injector
-    id: install-kaoto-extension
 events:
   postStart:
     - install-jbang
     - install-camel-jbang
-    - install-apache-camel-extension
-    - install-kaoto-extension 
