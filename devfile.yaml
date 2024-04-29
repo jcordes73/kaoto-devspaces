@@ -26,9 +26,9 @@ commands:
     id: install-camel-jbang
   - exec:
       commandLine: code-oss --install-extension redhat.apache-camel-extension-pack
-      component: tools
+      component: che-code-runtime-description
     id: install-apache-camel-extension
   - exec:
       commandLine: code-oss --install-extension redhat.vscode-kaoto
-      component: tools
+      component: che-code-runtime-description
     id: install-kaoto-extension
