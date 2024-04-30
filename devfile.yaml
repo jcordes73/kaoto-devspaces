@@ -21,20 +21,20 @@ commands:
       component: tools
     id: install-jbang
   - exec:
-      commandLine: jbang trust add -o --fresh --quiet https://github.com/apache/
+      commandLine: source ~/.bashrc && jbang trust add -o --fresh --quiet https://github.com/apache/
       component: tools
     id: trust-apache-jbang
   - exec:
-      commandLine: jbang app install camel@apache/camel
+      commandLine: source ~/.bashrc && jbang app install camel@apache/camel
       component: tools
     id: install-camel-jbang
-#  - exec:
-#      commandLine: curl -Ls https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/camel-k/1.10.6/camel-k-client-1.10.6-linux-64bit.tar.gz | tar -xvzf - kamel -C /home/user/bin
-#      component: tools
-#    id: install-kamel
+  - exec:
+      commandLine: curl -Ls https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/camel-k/1.10.6/camel-k-client-1.10.6-linux-64bit.tar.gz | tar -C /home/user/.local/bin -xvzf - kamel
+      component: tools
+    id: install-kamel
 events:
   postStart:
     - install-jbang
-#    - trust-apache-jbang
-#    - install-camel-jbang
-#    - install-kamel
+    - trust-apache-jbang
+    - install-camel-jbang
+    - install-kamel
